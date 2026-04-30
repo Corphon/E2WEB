@@ -191,16 +191,7 @@ The full text of each of the licenses for the dependencies listed above can be f
 
 ### License Location
 
-- The license for `xlsx`, `adler-32`, `cfb`, `codepage`, `crc-32`, `frac`, `ssf`,`wmf`, and `word` can be found in their respective directories inside `node_modules/` or from their official repositories:
-  - **xlsx**: [GitHub Repository](https://github.com/SheetJS/sheetjs)
-  - **adler-32**: [GitHub Repository](https://github.com/alexgorbatchev/node-adler-32)
-  - **cfb**: [GitHub Repository](https://github.com/guyonroche/cfb.js)
-  - **codepage**: [GitHub Repository](https://github.com/guyonroche/codepage)
-  - **crc-32**: [GitHub Repository](https://github.com/alexgorbatchev/node-crc-32)
-  - **frac**: [GitHub Repository](https://github.com/alexgorbatchev/node-frac)
-  - **ssf**: [GitHub Repository](https://github.com/SheetJS/ssf)
-  - **wmf**: [GitHub Repository](https://github.com/SheetJS/wmf)
-  - **word**: [GitHub Repository](https://github.com/SheetJS/word)
+- The license for `xlsx`, `adler-32`, `cfb`, `codepage`, `crc-32`, `frac`, `ssf`,`wmf`, and `word` can be found in their respective directories inside `node_modules/` or from their official repositories.
 
 ### Acknowledgement
 
