@@ -168,3 +168,53 @@ Contributions are welcome.
 ## License
 
 MIT
+
+# Third-Party Dependencies and License Information
+
+This project depends on the following open source packages. The licenses for these dependencies are listed below.
+
+## List of Dependencies
+
+- **xlsx** (Apache License 2.0)
+- **adler-32** (Apache License 2.0)
+- **cfb** (Apache License 2.0)
+- **codepage** (Apache License 2.0)
+- **crc-32** (Apache License 2.0)
+- **frac** (Apache License 2.0)
+- **ssf** (Apache License 2.0)
+- **wmf** (Apache License 2.0)
+- **word** (Apache License 2.0)
+
+## LicenseTexts
+
+The full text of each of the licenses for the dependencies listed above can be found in the respective module directories or from their official repositories.
+
+### License Location
+
+- The license for `xlsx`, `adler-32`, `cfb`, `codepage`, `crc-32`, `frac`, `ssf`,`wmf`, and `word` can be found in their respective directories inside `node_modules/` or from their official repositories:
+  - **xlsx**: [GitHub Repository](https://github.com/SheetJS/sheetjs)
+  - **adler-32**: [GitHub Repository](https://github.com/alexgorbatchev/node-adler-32)
+  - **cfb**: [GitHub Repository](https://github.com/guyonroche/cfb.js)
+  - **codepage**: [GitHub Repository](https://github.com/guyonroche/codepage)
+  - **crc-32**: [GitHub Repository](https://github.com/alexgorbatchev/node-crc-32)
+  - **frac**: [GitHub Repository](https://github.com/alexgorbatchev/node-frac)
+  - **ssf**: [GitHub Repository](https://github.com/SheetJS/ssf)
+  - **wmf**: [GitHub Repository](https://github.com/SheetJS/wmf)
+  - **word**: [GitHub Repository](https://github.com/SheetJS/word)
+
+### Acknowledgement
+
+This project includes open-source packages that are licensed under the Apache License 2.0. Wethank the authors and contributors of these libraries for their hard work and dedication.
+
+---
+
+## Important Notes
+
+As required by the Apache License 2.0, thefollowing are included in this project:
+
+- **Notices**: Thefull license text of the dependencies can be found in the respective repositories linked above.
+- **Redistribution**: Ifyou modify or redistribute this project, you must comply with the terms and conditions outlined in the Apache License 2.0for the included dependencies.
+- **Patent Grant**: ApacheLicense 2.0includes a patent grant, which ensures that users are not at risk of patent litigation based on the use of these libraries.
+
+For more information on the specific terms of the Apache License 2.0, pleaserefer to the full text of the license at [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
