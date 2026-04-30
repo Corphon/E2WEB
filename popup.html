@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>E2Web Form Mapper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            width: 420px;
+            margin: 0;
+            padding: 14px;
+            background: #f7f8fb;
+            color: #1f2937;
+        }
+
+        .title {
+            margin: 0 0 10px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin: 4px 0 0;
+        }
+
+        .status {
+            margin-top: 8px;
+            font-size: 12px;
+            min-height: 18px;
+        }
+
+        .status.ok {
+            color: #166534;
+        }
+
+        .status.error {
+            color: #991b1b;
+        }
+
+        button {
+            padding: 9px 10px;
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        button.secondary {
+            background-color: #0f766e;
+        }
+
+        button.secondary:hover {
+            background-color: #0d9488;
+        }
+
+        button.ghost {
+            background-color: #374151;
+        }
+
+        button.ghost:hover {
+            background-color: #1f2937;
+        }
+
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .config-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .config-row select {
+            flex: 1;
+        }
+
+        .config-name-input {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+            padding: 8px;
+            font-size: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 6px;
+            font-size: 12px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+            text-align: left;
+        }
+
+        .th-index {
+            width: 48px;
+        }
+
+        .th-sheet,
+        .th-cell {
+            width: 85px;
+        }
+
+        td input,
+        td select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 6px;
+            font-size: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: #ffffff;
+        }
+    </style>
+    <script src="xlsx.js"></script>
+</head>
+
+<body>
+    <h1 class="title">E2Web Form Mapper</h1>
+
+    <div class="row">
+        <button id="identifyButton">Identify Form</button>
+    </div>
+
+    <div class="card">
+        <input id="configNameInput" class="config-name-input" type="text" placeholder="Config name"
+            aria-label="Config name">
+        <div class="config-row">
+            <select id="configPresetSelect" aria-label="Select a config">
+                <option value="">Loading configs...</option>
+            </select>
+            <button id="loadConfigButton" class="secondary" disabled>Load</button>
+        </div>
+        <p class="hint">Built-in configs are loaded from configs/... and saved configs are stored locally in the extension.</p>
+    </div>
+
+    <div class="card">
+        <div class="row">
+            <button id="saveConfigButton" class="ghost">Save</button>
+            <button id="deleteConfigButton" class="ghost" disabled>Delete</button>
+            <button id="uploadDataButton">Upload And Fill</button>
+        </div>
+        <p class="hint">After identification, edit the mapping: field index -> sheet -> cell, such as A1.</p>
+    </div>
+
+    <div id="mappingCard" class="card hidden">
+        <strong>Field Mapping</strong>
+        <table>
+            <thead>
+                <tr>
+                    <th class="th-index">Index</th>
+                    <th>Page Field</th>
+                    <th class="th-sheet">Sheet</th>
+                    <th class="th-cell">Cell</th>
+                </tr>
+            </thead>
+            <tbody id="mappingBody"></tbody>
+        </table>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <input id="excelInput" class="hidden" type="file" accept=".xlsx,.xls">
+    <script src="popup.js"></script>
+</body>
+
+</html>

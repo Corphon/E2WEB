@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "default",
+      "label": "Default Project",
+      "match": {
+        "hostnames": [
+          "*"
+        ]
+      },
+      "configs": [
+        {
+          "label": "Blank Template",
+          "path": "configs/default/template-empty.json"
+        }
+      ]
+    }
+  ]
+}
