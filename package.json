@@ -1,15 +1,8 @@
 {
   "name": "e2web",
   "version": "1.0.0",
-  "main": "background.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "description": "",
-  "dependencies": {
-    "xlsx": "^0.18.5"
+    "test": "node tests/run-tests.js"
   }
 }

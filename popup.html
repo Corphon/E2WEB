@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: "Segoe UI", sans-serif;
-            width: 420px;
+            width: 520px;
             margin: 0;
             padding: 14px;
             background: #f7f8fb;
@@ -25,6 +25,7 @@
             display: flex;
             gap: 8px;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .card {
@@ -83,78 +84,111 @@
         }
 
         button.ghost {
-            background-color: #374151;
+            background-color: #6b7280;
         }
 
         button.ghost:hover {
-            background-color: #1f2937;
+            background-color: #4b5563;
         }
 
         button:disabled {
-            background-color: #9ca3af;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .config-row {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .config-row select {
-            flex: 1;
-        }
-
-        .config-name-input {
+        select,
+        input[type="text"] {
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
             padding: 8px;
             font-size: 13px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
+            background: #fff;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 8px;
+            table-layout: fixed;
         }
 
         th,
         td {
-            border: 1px solid #e5e7eb;
-            padding: 6px;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 7px 6px;
             font-size: 12px;
+            text-align: left;
             vertical-align: top;
+            word-break: break-word;
         }
 
         th {
-            background: #f3f4f6;
-            text-align: left;
+            color: #374151;
+            font-weight: 600;
         }
 
-        .th-index {
-            width: 48px;
+        .col-index {
+            width: 44px;
         }
 
-        .th-sheet,
-        .th-cell {
-            width: 85px;
+        .col-field {
+            width: 150px;
         }
 
-        td input,
-        td select {
+        .col-sheet {
+            width: 110px;
+        }
+
+        .col-cell {
+            width: 86px;
+        }
+
+        .col-action {
+            width: 72px;
+        }
+
+        .mapping-tag {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 6px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .mapping-row-ignored td {
+            opacity: 0.65;
+        }
+
+        button.row-remove-button {
+            flex: none;
             width: 100%;
-            box-sizing: border-box;
-            padding: 6px;
+            padding: 6px 8px;
             font-size: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            background: #ffffff;
+            background-color: #9ca3af;
+        }
+
+        button.row-remove-button:hover {
+            background-color: #6b7280;
+        }
+
+        button.row-remove-button.is-ignored {
+            background-color: #d97706;
+        }
+
+        button.row-remove-button.is-ignored:hover {
+            background-color: #b45309;
+        }
+
+        .inline-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
     </style>
-    <script src="xlsx.js"></script>
 </head>
 
 <body>
@@ -162,38 +196,38 @@
 
     <div class="row">
         <button id="identifyButton">Identify Form</button>
+        <button id="uploadDataButton">Upload Excel</button>
+        <input id="excelInput" class="hidden" type="file" accept=".xlsx,.xls,.csv" />
+    </div>
+
+    <div class="row">
+        <button id="saveConfigButton">Save Config</button>
+        <button id="deleteConfigButton" class="ghost">Delete Config</button>
     </div>
 
     <div class="card">
-        <input id="configNameInput" class="config-name-input" type="text" placeholder="Config name"
-            aria-label="Config name">
-        <div class="config-row">
-            <select id="configPresetSelect" aria-label="Select a config">
-                <option value="">Loading configs...</option>
-            </select>
-            <button id="loadConfigButton" class="secondary" disabled>Load</button>
+        <div class="inline-fields">
+            <div>
+                <label for="configPresetSelect">Config preset</label>
+                <select id="configPresetSelect"></select>
+            </div>
+            <div>
+                <label for="configNameInput">Config name</label>
+                <input id="configNameInput" type="text" placeholder="Enter config name" />
+            </div>
         </div>
-        <p class="hint">Built-in configs are loaded from configs/... and saved configs are stored locally in the extension.</p>
-    </div>
-
-    <div class="card">
-        <div class="row">
-            <button id="saveConfigButton" class="ghost">Save</button>
-            <button id="deleteConfigButton" class="ghost" disabled>Delete</button>
-            <button id="uploadDataButton">Upload And Fill</button>
-        </div>
-        <p class="hint">After identification, edit the mapping: field index -> sheet -> cell, such as A1.</p>
+        <p class="hint">Built-in configs come from the catalog. Saved configs are stored locally.</p>
     </div>
 
     <div id="mappingCard" class="card hidden">
-        <strong>Field Mapping</strong>
         <table>
             <thead>
                 <tr>
-                    <th class="th-index">Index</th>
-                    <th>Page Field</th>
-                    <th class="th-sheet">Sheet</th>
-                    <th class="th-cell">Cell</th>
+                    <th class="col-index">#</th>
+                    <th class="col-field">Field</th>
+                    <th class="col-sheet">Sheet</th>
+                    <th class="col-cell">Cell</th>
+                    <th class="col-action">Ignore</th>
                 </tr>
             </thead>
             <tbody id="mappingBody"></tbody>
@@ -202,7 +236,7 @@
 
     <div id="status" class="status"></div>
 
-    <input id="excelInput" class="hidden" type="file" accept=".xlsx,.xls">
+    <script src="xlsx.js"></script>
     <script src="popup.js"></script>
 </body>
 
